@@ -10,31 +10,61 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { auth, signIn, signOut } from "@/auth";
+import { Button } from "@/components/ui/button";
 
-const Header: React.FC = () => {
+const Header: React.FC = async () => {
+	const session = await auth();
+	const user = session?.user;
 	return (
 		<div className="flex items-center justify-between px-6 py-4">
 			<Link href="/">
-			    <div className="flex items-center text-3xl font-bold" id="left">
-    				<span className="!text-4xl material-symbols-outlined">eco</span>
-    				Agreemint
-    			</div>
+				<div className="flex items-center text-3xl font-bold" id="left">
+					<span className="!text-4xl material-symbols-outlined">
+						eco
+					</span>
+					Agreemint
+				</div>
 			</Link>
-			<div className="" id="right">
-				<DropdownMenu>
-					<DropdownMenuTrigger>
-						<Avatar>
-							<AvatarImage src="https://github.com/shadcn.png" />
-							<AvatarFallback>CN</AvatarFallback>
-						</Avatar>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent className="mr-2">
-						<DropdownMenuLabel>My Account</DropdownMenuLabel>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem>Profile</DropdownMenuItem>
-						<DropdownMenuItem>Settings</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
+			<div id="right">
+				{user ? (
+					<DropdownMenu>
+						<DropdownMenuTrigger>
+							<Avatar>
+								<AvatarImage src={user.image} />
+								<AvatarFallback>CN</AvatarFallback>
+							</Avatar>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className="mr-2">
+							<DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+							<DropdownMenuSeparator />
+							<DropdownMenuItem>Profile</DropdownMenuItem>
+							<DropdownMenuItem>Settings</DropdownMenuItem>
+							<form
+								action={async () => {
+									"use server";
+									await signOut({ redirectTo: "/landing" });
+								}}
+								className="w-full"
+							>
+								<button type="submit" className="w-full">
+									<DropdownMenuItem>
+										Sign Out
+									</DropdownMenuItem>
+								</button>
+							</form>
+						</DropdownMenuContent>
+					</DropdownMenu>
+				) : (
+					<form
+						action={async () => {
+							"use server";
+							await signIn("google", { redirectTo: "/" });
+						}}
+					>
+						<Button type="submit">Sign in</Button>
+					</form>
+				)}
 			</div>
 		</div>
 	);
