@@ -8,9 +8,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   theme: {
     colorScheme: "light", // "auto" | "dark" | "light"
   },
-  pages: {
-    signIn: '/', // Redirect here after sign in
-    signOut: '/landing', // Redirect here after sign out
+  callbacks: {
+    authorized: async ({ auth }) => {
+      // Logged in users are authenticated, otherwise redirect to login page
+      return !!auth
+    },
   },
-  
+
 })
