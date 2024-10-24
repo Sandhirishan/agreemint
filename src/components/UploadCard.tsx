@@ -100,6 +100,25 @@ const UploadCard = ({ setDocument }) => {
 
             const data = await response.json();
             console.log("Response from server:", data);
+
+			const documentResponse = await fetch("/api/createDoc", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					userId: userId, // The user's ID
+					content: data.message, // The generated document content
+				}),
+			});
+	
+			if (!documentResponse.ok) {
+				throw new Error("Failed to upload document");
+			}
+	
+			const documentData = await documentResponse.json();
+			console.log(documentData)
+	
             setDocument(data.message);
             // You can handle successful response here
         } catch (error) {
