@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { MoonLoader } from "react-spinners";
 import { useSession } from "next-auth/react";
 
-const UploadCard = ({ setDocument }) => {
+const UploadCard = ({ setDocument, setDocumentId }) => {
     const { data: session } = useSession();
     const userId = session?.user?.id;
 	console.log(userId)
@@ -22,7 +22,6 @@ const UploadCard = ({ setDocument }) => {
     const [mimeType, setMimeType] = useState("");
     const [loading, setLoading] = useState(false); // Loading state for the button
     const [error, setError] = useState<string | null>(null); // Error state
-
     // State for company details
     const [companyDetails, setCompanyDetails] = useState({
         companyName: "",
@@ -118,7 +117,7 @@ const UploadCard = ({ setDocument }) => {
 	
 			const documentData = await documentResponse.json();
 			console.log(documentData)
-	
+			setDocumentId(documentData.id)
             setDocument(data.message);
             // You can handle successful response here
         } catch (error) {
