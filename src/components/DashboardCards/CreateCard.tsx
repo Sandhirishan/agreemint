@@ -8,6 +8,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const CreateCard: React.FC = () => {
 	return (
@@ -19,12 +20,14 @@ const CreateCard: React.FC = () => {
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<Button className="w-full bg-voilet">
-						<span className="material-symbols-outlined">
-							new_window
-						</span>{" "}
-						Create an agreement
-					</Button>
+					<Link href={"/create"}>
+						<Button className="w-full bg-voilet">
+							<span className="material-symbols-outlined">
+								new_window
+							</span>{" "}
+							Create an agreement
+						</Button>
+					</Link>
 				</CardContent>
 			</Card>
 	);
