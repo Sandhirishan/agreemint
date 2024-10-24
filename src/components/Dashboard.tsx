@@ -2,6 +2,7 @@ import React from "react";
 import OverviewCard from "@/components/DashboardCards/OverviewCard";
 import CreateCard from "@/components/DashboardCards/CreateCard";
 import DocumentsCard from "@/components/DocumentsCard/DocumentsCard";
+import OnboardingCard from "@/components/OnboardingCard";
 
 const Dashboard: React.FC = () => {
 	return (
@@ -9,6 +10,7 @@ const Dashboard: React.FC = () => {
 			<OverviewCard />
 			<CreateCard />
 			<DocumentsCard mini />
+			<OnboardingCard />
 		</div>
 	);
 };
