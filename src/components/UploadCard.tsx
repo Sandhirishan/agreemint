@@ -15,7 +15,8 @@ import { useSession } from "next-auth/react";
 
 const UploadCard = ({ setDocument }) => {
     const { data: session } = useSession();
-    const userId = session?.user?.id; // Accessing user ID safely
+    const userId = session?.user?.id;
+	console.log(userId)
     const [audioBase64, setAudioBase64] = useState<string | null>(null);
     const [description, setDescription] = useState("");
     const [mimeType, setMimeType] = useState("");
