@@ -124,9 +124,9 @@ const MarkdownEdit = ({ document, documentId, setDocument, isOtherParty = false 
         )}
       </div>
 
-      <Button disabled={isSaving}>
+      {!isReadOnly && <Button disabled={isSaving}>
         {isSaving ? "Saving..." : "Save Changes"}
-      </Button>
+      </Button>}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import OverviewCard from "@/components/DashboardCards/OverviewCard";
 import CreateCard from "@/components/DashboardCards/CreateCard";
 import DocumentsCard from "@/components/DocumentsCard/DocumentsCard";
 import OnboardingCard from "@/components/OnboardingCard";
+import VerifyCard from "@/components/DashboardCards/VerifyCard";
 
 const Dashboard: React.FC = () => {
 	return (
@@ -11,6 +12,7 @@ const Dashboard: React.FC = () => {
 			<CreateCard />
 			<DocumentsCard mini />
 			<OnboardingCard />
+			<VerifyCard />
 		</div>
 	);
 };
