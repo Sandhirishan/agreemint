@@ -45,7 +45,7 @@ export async function POST(req) {
   
 		// Construct the prompt based on the uploaded audio
 		prompt =
-		  "Analyze the uploaded voice recording and extract the key details such as the company name, employee name, wage, job title, and any other relevant terms discussed. Using these details, generate a comprehensive legal contract. The contract should include: a clear title, the introduction specifying the parties involved and their roles, the scope of work, responsibilities, payment terms, deadlines, confidentiality, liability, dispute resolution clauses, and signature lines. Ensure all placeholders like [Company Name], [Employee Name], [Wage], etc., are replaced with actual values extracted from the call." +  `User Details: Company - ${companyName}, ${position}, located in ${companyCity}, ${companyCountry}.`;
+		  "Analyze the uploaded voice recording and extract the key details such as the company name, employee name, wage, job title, and any other relevant terms discussed. Using these details, generate a comprehensive legal contract. The contract should include: a clear title, the introduction specifying the parties involved and their roles, the scope of work, responsibilities, payment terms, deadlines, confidentiality, liability, dispute resolution clauses.Make sure you Also delete the signature placeholders for both the parties. Ensure all placeholders like [Company Name], [Employee Name], [Wage], etc., are replaced with actual values extracted from the call." +  `User Details: Company - ${companyName}, ${position}, located in ${companyCity}, ${companyCountry}. `;
 		  
 		  // Call the model API with both the audio file and description
 		result = await model.generateContent([
@@ -61,7 +61,7 @@ export async function POST(req) {
 		]);
 	  } else if (description) {
 		  prompt =
-		  "Using the provided description, generate a legal contract that formalizes the agreements. The contract should include: a clear title for the contract, an introduction specifying the parties involved, their roles, and the date of the agreement, the scope of work, responsibilities, payment terms, deadlines, confidentiality, liability, dispute resolution clauses, and signature lines. Ensure the contract uses professional legal language and is based on the provided details."+  `User Details: Company - ${companyName}, ${position}, located in ${companyCity}, ${companyCountry}.`;
+		  "Using the provided description, generate a legal contract that formalizes the agreements. The contract should include: a clear title for the contract, an introduction specifying the parties involved, their roles, and the date of the agreement, the scope of work, responsibilities, payment terms, deadlines, confidentiality, liability, dispute resolution clauses. Make sure you Also delete the signature placeholders for both the parties. Ensure the contract uses professional legal language and is based on the provided details."+  `User Details: Company - ${companyName}, ${position}, located in ${companyCity}, ${companyCountry}.`;
 		  
 		  result = await model.generateContent([{ text: prompt + description }]);
 	  } else {
