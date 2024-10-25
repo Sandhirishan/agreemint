@@ -84,104 +84,50 @@ const MarkdownEdit = ({ document, documentId, setDocument, isOtherParty = false 
   };
 
   return (
-    // <div className="w-full h-screen font-inter">
-    //   <MDEditor className="w-3/4" value={content} onChange={handleChange} readOnly={isReadOnly && !isOtherParty} />
+    <div className="w-full h-screen font-inter">
+      <MDEditor className="w-3/4" value={content} onChange={handleChange} readOnly={isReadOnly && !isOtherParty} />
 
-    //   <div>
-    //     {!isReadOnly && (
-    //       <Dialog>
-    //         <DialogTrigger>
-    //           <Button>Sign Here</Button>
-    //         </DialogTrigger>
-    //         <DialogContent>
-    //           <DialogHeader>
-    //             <DialogTitle>Are you sure you want to sign this?</DialogTitle>
-    //             <DialogDescription>
-    //               <form
-    //                 onSubmit={(e) => {
-    //                   e.preventDefault();
-    //                   handleSign();
-    //                 }}
-    //               >
-    //                 <Label htmlFor="Name">Enter Name for Sign:</Label>
-    //                 <Input
-    //                   type="text"
-    //                   name="Name"
-    //                   value={signerName}
-    //                   onChange={(e) => setSignerName(e.target.value)}
-    //                   required
-    //                 />
-    //                 <Button type="submit">Sign</Button>
-    //               </form>
-    //             </DialogDescription>
-    //           </DialogHeader>
-    //         </DialogContent>
-    //       </Dialog>
-    //     )}
+      <div>
+        {!isReadOnly && (
+          <Dialog>
+            <DialogTrigger>
+              <Button>Sign Here</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Are you sure you want to sign this?</DialogTitle>
+                <DialogDescription>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSign();
+                    }}
+                  >
+                    <Label htmlFor="Name">Enter Name for Sign:</Label>
+                    <Input
+                      type="text"
+                      name="Name"
+                      value={signerName}
+                      onChange={(e) => setSignerName(e.target.value)}
+                      required
+                    />
+                    <Button type="submit">Sign</Button>
+                  </form>
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        )}
 
-    //     {isOtherParty && !isReadOnly && (
-    //       <Button onClick={() => setIsReadOnly(false)}>Add Your Signature</Button>
-    //     )}
-    //   </div>
+        {isOtherParty && !isReadOnly && (
+          <Button onClick={() => setIsReadOnly(false)}>Add Your Signature</Button>
+        )}
+      </div>
 
-    //   <Button disabled={isSaving}>
-    //     {isSaving ? "Saving..." : "Save Changes"}
-    //   </Button>
-    // </div>
- // );
- <div className="w-full h-screen font-inter flex flex-col items-center justify-center">
-  {/* Markdown Editor Section */}
-  <div className="w-full h-full flex justify-center items-center">
-    <MDEditor
-      className="w-3/4 h-[80vh] max-w-[1200px]" // Responsive width and height settings
-      value={content}
-      onChange={handleChange}
-      readOnly={isReadOnly && !isOtherParty}
-    />
-  </div>
-
-  {/* Signature and Save Section */}
-  <div className="mt-4 w-3/4 max-w-[1200px] flex flex-col items-center">
-    {!isReadOnly && (
-      <Dialog>
-        <DialogTrigger>
-          <Button>Sign Here</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Are you sure you want to sign this?</DialogTitle>
-            <DialogDescription>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSign();
-                }}
-              >
-                <Label htmlFor="Name">Enter Name for Sign:</Label>
-                <Input
-                  type="text"
-                  name="Name"
-                  value={signerName}
-                  onChange={(e) => setSignerName(e.target.value)}
-                  required
-                />
-                <Button type="submit">Sign</Button>
-              </form>
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-    )}
-
-    {isOtherParty && !isReadOnly && (
-      <Button onClick={() => setIsReadOnly(false)}>Add Your Signature</Button>
-    )}
-
-    <Button className="mt-4" disabled={isSaving}>
-      {isSaving ? "Saving..." : "Save Changes"}
-    </Button>
-  </div>
-</div>
+      <Button disabled={isSaving}>
+        {isSaving ? "Saving..." : "Save Changes"}
+      </Button>
+    </div>
   );
 };
 
